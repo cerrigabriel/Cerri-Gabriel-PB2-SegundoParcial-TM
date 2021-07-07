@@ -11,8 +11,8 @@ public class CasosDePrueba {
 		Comestible producto = new Galletitas(1, "Cerealitas", "22/06/2021", "31/01/2022", "Arcor", 120.0);
 		
 		assertEquals("Cerealitas", ((Galletitas)producto).getDescripcion());
-		assertEquals("22/06/2021", producto.getFechaDeElaboracion());
-		assertEquals("31/01/2022", producto.getFechaDeVencimiento());
+		assertEquals("22/06/2021", producto.getFechaElaboracion());
+		assertEquals("31/01/2022", producto.getFechaVencimiento());
 		assertEquals("Arcor", ((Galletitas)producto).getMarca());
 	}
 	
@@ -21,8 +21,8 @@ public class CasosDePrueba {
 		Comestible producto = new Carne(2, "Tapa de nalga", "07/07/2021", "15/07/2021", 2.0, "La Estancia", 600.0);
 		
 		assertEquals("Tapa de nalga", ((Carne)producto).getDescripcion());
-		assertEquals("07/07/2021", producto.getFechaDeElaboracion());
-		assertEquals("15/07/2021", producto.getFechaDeVencimiento());
+		assertEquals("07/07/2021", producto.getFechaElaboracion());
+		assertEquals("15/07/2021", producto.getFechaVencimiento());
 		assertEquals(2.0, ((Carne)producto).getKilos(), 0.1);
 	}
 	
@@ -51,7 +51,7 @@ public class CasosDePrueba {
 		Indumentaria producto = new Remera(5, "Básica", "XL", "Lacoste", "Azul", 2000.0);
 		
 		assertEquals("Básica", ((Remera)producto).getDescripcion());
-		assertEquals("XL", producto.getTalle());
+		assertEquals("XL", ((Remera)producto).getTalle());
 		assertEquals("Lacoste", ((Remera)producto).getMarca());
 	}
 	
@@ -60,7 +60,7 @@ public class CasosDePrueba {
 		Indumentaria producto = new Zapatilla(6, "De running", 42, "Nike", "Blancas", 5000.0);
 		
 		assertEquals("De running", ((Zapatilla)producto).getDescripcion());
-		assertEquals("42", producto.getTalle());
+		assertEquals((Integer)42, ((Zapatilla)producto).getTalle());
 		assertEquals("Blancas", producto.getColor());
 		assertEquals("Nike", ((Zapatilla)producto).getMarca());
 	}
@@ -182,7 +182,15 @@ public class CasosDePrueba {
 	
 	@Test 
 	public void queSePuedanObtenerLosProductosComestibles() {
+		Supermercado vital = new Supermercado("Vital");
+		vital.ingresarProducto(new Galletitas(1, "Cerealitas", "22/06/2021", "31/01/2022", "Arcor", 120.0));
+		vital.ingresarProducto(new Carne(2, "Tapa de nalga", "07/07/2021", "15/07/2021", 2.0, "La Estancia", 600.0));
+		vital.ingresarProducto(new Remera(9, "Básica", "L", "Lacoste", "Azul", 2000.0));
+		vital.ingresarProducto(new Remera(9, "Básica", "M", "Lacoste", "Roja", 2000.0));
+		vital.ingresarProducto(new Remera(9, "Básica", "S", "Lacoste", "Roja", 2000.0));
+		vital.ingresarProducto(new Galletitas(10, "Oreo", "05/05/2021", "30/03/2022", "Arcor", 150.0));
 		
+		assertEquals((Integer)3, vital.getCantidadProductosComestibles());
 	}
 	
 }
